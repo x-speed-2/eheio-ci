@@ -1,10 +1,8 @@
 package ma.ehei_github_ci;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-
-import com.ehei_ci.Produit;
-
 
 
 public class ProduitService {
@@ -76,5 +74,23 @@ public class ProduitService {
                 return;
             }
         }
+
+}
+    public void supprimerProduit(Long id) {
+        if (!produitExisteParId(id)) {
+            System.out.println("Erreur : Produit non trouvé avec l'ID " + id);
+            return;
+        }
+
+        Iterator<Produit> iterator = produits.iterator();
+        while (iterator.hasNext()) {
+            Produit produit = iterator.next();
+            if (produit.getId().equals(id)) {
+                iterator.remove();
+                System.out.println("Produit supprimé avec succès. ID : " + id);
+                return;
+            }
+        }
+    }
 
 }
