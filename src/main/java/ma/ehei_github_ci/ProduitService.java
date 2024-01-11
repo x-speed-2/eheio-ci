@@ -3,6 +3,8 @@ package ma.ehei_github_ci;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ehei_ci.Produit;
+
 
 
 public class ProduitService {
@@ -55,5 +57,24 @@ public class ProduitService {
         produits.add(nouveauProduit);
         System.out.println("Produit ajouté avec succès : " + nouveauProduit);
     }
+    public void mettreAJourProduit(Produit produitMaj) {
+        if (!produitExisteParId(produitMaj.getId())) {
+            System.out.println("Erreur : Produit non trouvé avec l'ID " + produitMaj.getId());
+            return;
+        }
+
+        if (produitMaj.getPrix() < 0 || produitMaj.getQuantite() < 0) {
+            System.out.println("Erreur : Le prix et la quantité des produits doivent être positifs.");
+            return;
+        }
+
+        for (int i = 0; i < produits.size(); i++) {
+            Produit produit = produits.get(i);
+            if (produit.getId().equals(produitMaj.getId())) {
+                produits.set(i, produitMaj);
+                System.out.println("Produit mis à jour avec succès : " + produitMaj);
+                return;
+            }
+        }
 
 }
